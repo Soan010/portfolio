@@ -620,6 +620,38 @@
             margin-top: 0.5rem;
         }
 
+        .lang-switcher {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.8rem;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            opacity: 0.4;
+            transition: all var(--transition-speed);
+            padding: 0;
+            filter: grayscale(80%);
+        }
+
+        .lang-btn:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+            filter: grayscale(20%);
+        }
+
+        .lang-btn.active {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
         @media (max-width: 600px) {
             .hero h1 {
                 font-size: 1.8rem;
@@ -639,10 +671,15 @@
 
 <body>
 
-    <div class="container">
+    <div class="container" style="position: relative;">
+
+        <div class="lang-switcher fade-in">
+            <button id="btn-fr" class="lang-btn active" title="Français" onclick="setLang('fr')">🇫🇷</button>
+            <button id="btn-en" class="lang-btn" title="English" onclick="setLang('en')">🇬🇧</button>
+        </div>
 
         <div id="error-container" class="error-message fade-in">
-            <p>Impossible de charger les données pour le moment. Veuillez réessayer plus tard.</p>
+            <p data-i18n="error_msg">Impossible de charger les données pour le moment. Veuillez réessayer plus tard.</p>
         </div>
 
         <section class="hero fade-in">
@@ -677,13 +714,13 @@
                     <svg>
                         <use href="#icon-download"></use>
                     </svg>
-                    Télécharger mon CV
+                    <span data-i18n="cv_btn">Télécharger mon CV</span>
                 </a>
                 <button id="contact-btn" class="btn btn-secondary">
                     <svg>
                         <use href="#icon-mail"></use>
                     </svg>
-                    Me contacter
+                    <span data-i18n="contact_btn">Me contacter</span>
                 </button>
             </div>
 
@@ -692,7 +729,7 @@
         </section>
 
         <section class="fade-in delay-1">
-            <h2 class="section-title">Projets récents</h2>
+            <h2 class="section-title" data-i18n="recent_projects">Projets récents</h2>
             <div id="projects-grid" class="projects-grid">
                 <div class="card skeleton-card">
                     <div class="skeleton skeleton-text"></div>
@@ -722,35 +759,38 @@
         </section>
 
         <section class="fade-in delay-2">
-            <h2 class="section-title">Loisirs</h2>
+            <h2 class="section-title" data-i18n="hobbies">Loisirs</h2>
             <div class="projects-grid" style="margin-bottom: 2rem;">
                 <article class="card">
-                    <h3 class="card-title">⚽ Sports collectifs</h3>
-                    <p class="card-desc">J'aime collaborer en équipe pour aller chercher la victoire, avec une certaine
+                    <h3 class="card-title" data-i18n="sports_title">⚽ Sports collectifs</h3>
+                    <p class="card-desc" data-i18n="sports_desc">J'aime collaborer en équipe pour aller chercher la
+                        victoire, avec une certaine
                         préférence pour le football.</p>
                 </article>
                 <article class="card">
-                    <h3 class="card-title">🎮 Jeux vidéo</h3>
-                    <p class="card-desc">Je suis un grand fan de jeux compétitifs, notamment de titres comme League of
+                    <h3 class="card-title" data-i18n="games_title">🎮 Jeux vidéo</h3>
+                    <p class="card-desc" data-i18n="games_desc">Je suis un grand fan de jeux compétitifs, notamment de
+                        titres comme League of
                         Legends ou Counter-Strike.</p>
                 </article>
                 <article class="card">
-                    <h3 class="card-title">🎬 Musique & Cinéma</h3>
-                    <p class="card-desc">J'aime aussi la musique et le cinéma, en particulier les films assez
+                    <h3 class="card-title" data-i18n="movies_title">🎬 Musique & Cinéma</h3>
+                    <p class="card-desc" data-i18n="movies_desc">J'aime aussi la musique et le cinéma, en particulier
+                        les films assez
                         psychologiques comme <em>Shutter Island</em>.</p>
                 </article>
             </div>
         </section>
 
         <section class="fade-in delay-2">
-            <h2 class="section-title">Parcours</h2>
+            <h2 class="section-title" data-i18n="education">Parcours</h2>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">2025 - Actuel</div>
-                    <h3 class="timeline-title">Master Informatique (e-Services)</h3>
+                    <h3 class="timeline-title" data-i18n="master_title">Master Informatique (e-Services)</h3>
                     <div class="timeline-subtitle">Université de Lille</div>
-                    <div class="timeline-desc">
+                    <div class="timeline-desc" data-i18n="master_desc">
                         Approfondissement en ingénierie logicielle, architecture des services web avancés et gestion de
                         projet informatique.
                     </div>
@@ -758,9 +798,9 @@
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">2022 - 2025</div>
-                    <h3 class="timeline-title">Licence Informatique</h3>
+                    <h3 class="timeline-title" data-i18n="licence_title">Licence Informatique</h3>
                     <div class="timeline-subtitle">Université de Valenciennes (UPHF)</div>
-                    <div class="timeline-desc">
+                    <div class="timeline-desc" data-i18n="licence_desc">
                         Acquisition des fondamentaux en développement, algorithmique, base de données et architectures
                         logicielles.
                     </div>
@@ -768,9 +808,10 @@
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-date">2022</div>
-                    <h3 class="timeline-title">Baccalauréat Général (Spécialités Maths, Physique-Chimie)</h3>
+                    <h3 class="timeline-title" data-i18n="bac_title">Baccalauréat Général (Spécialités Maths,
+                        Physique-Chimie)</h3>
                     <div class="timeline-subtitle">Institut d'Anchin, Pecquencourt</div>
-                    <div class="timeline-desc">
+                    <div class="timeline-desc" data-i18n="bac_desc">
                         Obtention du baccalauréat avec la mention Assez Bien.
                     </div>
                 </div>
@@ -778,7 +819,7 @@
         </section>
 
         <section class="fade-in delay-2">
-            <h2 class="section-title">Langages dominants</h2>
+            <h2 class="section-title" data-i18n="languages">Langages dominants</h2>
             <div id="languages-container" class="languages-container">
                 <div class="skeleton skeleton-text short" style="height: 2.5rem; border-radius: 20px;"></div>
                 <div class="skeleton skeleton-text" style="width: 30%; height: 2.5rem; border-radius: 20px;"></div>
@@ -790,7 +831,7 @@
 
             <div class="live-indicator">
                 <span class="pulsing-dot"></span>
-                <span>Données synchronisées en temps réel depuis GitHub</span>
+                <span data-i18n="footer_sync">Données synchronisées en temps réel depuis GitHub</span>
             </div>
         </footer>
 
@@ -858,33 +899,35 @@
                     <use href="#icon-close"></use>
                 </svg>
             </button>
-            <h2 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem;">Me contacter</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">
+            <h2 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem;" data-i18n="modal_title">Me contacter
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;" data-i18n="modal_desc">
                 Envoyez-moi un message via ce formulaire !
             </p>
 
             <form action="https://formspree.io/f/mvzwopwb" method="POST" class="contact-form">
                 <div>
-                    <label for="name" class="form-label">Votre Nom</label>
-                    <input type="text" id="name" name="name" class="form-input" required placeholder="Jean Dupont">
+                    <label for="name" class="form-label" data-i18n="label_name">Votre Nom</label>
+                    <input type="text" id="name" name="name" class="form-input" required placeholder="Jean Dupont"
+                        data-i18n="ph_name">
                 </div>
 
                 <div>
-                    <label for="email" class="form-label">Votre Email</label>
+                    <label for="email" class="form-label" data-i18n="label_email">Votre Email</label>
                     <input type="email" id="email" name="_replyto" class="form-input" required
-                        placeholder="jean@exemple.com">
+                        placeholder="jean@exemple.com" data-i18n="ph_email">
                 </div>
 
                 <div>
-                    <label for="message" class="form-label">Votre Message</label>
+                    <label for="message" class="form-label" data-i18n="label_message">Votre Message</label>
                     <textarea id="message" name="message" class="form-textarea" required
-                        placeholder="Bonjour Mathis, je vous contacte pour..."></textarea>
+                        placeholder="Bonjour Mathis, je vous contacte pour..." data-i18n="ph_message"></textarea>
                 </div>
 
                 <input type="hidden" name="_language" value="fr" />
 
                 <button type="submit" class="btn btn-primary form-submit">
-                    Envoyer le message
+                    <span data-i18n="submit_btn">Envoyer le message</span>
                 </button>
             </form>
         </div>
@@ -936,6 +979,8 @@
             } catch (error) {
                 console.error('Erreur:', error);
                 document.getElementById('error-container').style.display = 'block';
+            } finally {
+                setLang(document.documentElement.lang || 'fr');
             }
         }
 
@@ -949,14 +994,14 @@
             avatarContainer.appendChild(img);
 
             document.getElementById('user-name').textContent = profile.name || profile.login;
-            document.getElementById('user-bio').textContent = profile.bio || "Étudiant en 1ère année de Master Informatique à l'Université de Lille.";
+            document.getElementById('user-bio').innerHTML = profile.bio ? profile.bio : '<span data-i18n="default_bio">Étudiant en 1ère année de Master Informatique à l\'Université de Lille.</span>';
 
             const badgesContainer = document.getElementById('badges-container');
             badgesContainer.innerHTML = '';
 
             if (profile.location) appendBadge(badgesContainer, 'icon-location', profile.location);
-            appendBadge(badgesContainer, 'icon-users', `${profile.followers} abonnés`);
-            appendBadge(badgesContainer, 'icon-repo', `${profile.public_repos} repos`);
+            appendBadge(badgesContainer, 'icon-users', `<span>${profile.followers}</span> <span data-i18n="followers">abonnés</span>`);
+            appendBadge(badgesContainer, 'icon-repo', `<span>${profile.public_repos}</span> <span data-i18n="repos">repos</span>`);
 
             if (profile.twitter_username) {
                 const socialLinks = document.getElementById('social-links');
@@ -978,7 +1023,7 @@
             use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `#${iconId}`);
             svg.appendChild(use);
             const span = document.createElement('span');
-            span.textContent = text;
+            span.innerHTML = text;
             badge.appendChild(svg);
             badge.appendChild(span);
             container.appendChild(badge);
@@ -987,7 +1032,7 @@
         function renderRepos(repos) {
             const grid = document.getElementById('projects-grid');
             grid.innerHTML = '';
-            if (repos.length === 0) { grid.textContent = "Aucun dépôt public pour le moment."; return; }
+            if (repos.length === 0) { grid.innerHTML = '<span data-i18n="no_repos_label">Aucun dépôt public pour le moment.</span>'; return; }
 
             repos.forEach(repo => {
                 const card = document.createElement('article');
@@ -1049,7 +1094,7 @@
             const languagesSet = new Set();
             repos.forEach(repo => { if (repo.language) languagesSet.add(repo.language); });
 
-            if (languagesSet.size === 0) { container.textContent = "Aucun langage détecté dans les dépôts récents."; return; }
+            if (languagesSet.size === 0) { container.innerHTML = '<span data-i18n="no_lang_label">Aucun langage détecté dans les dépôts récents.</span>'; return; }
 
             languagesSet.forEach(lang => {
                 const tag = document.createElement('div');
@@ -1086,6 +1131,99 @@
                 }
             });
         });
+
+        const translations = {
+            fr: {
+                error_msg: "Impossible de charger les données pour le moment. Veuillez réessayer plus tard.",
+                cv_btn: "Télécharger mon CV",
+                contact_btn: "Me contacter",
+                recent_projects: "Projets récents",
+                education: "Parcours",
+                master_title: "Master Informatique (e-Services)",
+                master_desc: "Approfondissement en ingénierie logicielle, architecture des services web avancés et gestion de\n                        projet informatique.",
+                licence_title: "Licence Informatique",
+                licence_desc: "Acquisition des fondamentaux en développement, algorithmique, base de données et architectures\n                        logicielles.",
+                bac_title: "Baccalauréat Général (Spécialités Maths, Physique-Chimie)",
+                bac_desc: "Obtention du baccalauréat avec la mention Assez Bien.",
+                languages: "Langages dominants",
+                hobbies: "Loisirs",
+                sports_title: "⚽ Sports collectifs",
+                sports_desc: "J'aime collaborer en équipe pour aller chercher la victoire, avec une certaine\n                        préférence pour le football.",
+                games_title: "🎮 Jeux vidéo",
+                games_desc: "Je suis un grand fan de jeux compétitifs, notamment de titres comme League of\n                        Legends ou Counter-Strike.",
+                movies_title: "🎬 Musique & Cinéma",
+                movies_desc: "J'aime aussi la musique et le cinéma, en particulier les films assez\n                        psychologiques comme <em>Shutter Island</em>.",
+                footer_sync: "Données synchronisées en temps réel depuis GitHub",
+                modal_title: "Me contacter",
+                modal_desc: "Envoyez-moi un message via ce formulaire !",
+                label_name: "Votre Nom",
+                label_email: "Votre Email",
+                label_message: "Votre Message",
+                submit_btn: "Envoyer le message",
+                ph_name: "Jean Dupont",
+                ph_email: "jean@exemple.com",
+                ph_message: "Bonjour Mathis, je vous contacte pour...",
+                default_bio: "Étudiant en 1ère année de Master Informatique à l'Université de Lille.",
+                followers: "abonnés",
+                repos: "dépôts publics",
+                no_repos_label: "Aucun dépôt public pour le moment.",
+                no_lang_label: "Aucun langage détecté dans les dépôts récents."
+            },
+            en: {
+                error_msg: "Unable to load data right now. Please try again later.",
+                cv_btn: "Download my Resume",
+                contact_btn: "Contact me",
+                recent_projects: "Recent Projects",
+                education: "Education",
+                master_title: "Master's in Computer Science (e-Services)",
+                master_desc: "Advanced studies in software engineering, web services architecture, and IT project management.",
+                licence_title: "Bachelor's in Computer Science",
+                licence_desc: "Fundamentals of software development, algorithms, databases, and software architectures.",
+                bac_title: "High School Diploma (Majors in Math, Physics-Chemistry)",
+                bac_desc: "Graduated with honors (Assez Bien).",
+                languages: "Main Languages",
+                hobbies: "Hobbies",
+                sports_title: "⚽ Team Sports",
+                sports_desc: "I love collaborating as a team to achieve victory, with a strong preference for football.",
+                games_title: "🎮 Video Games",
+                games_desc: "I am a big fan of competitive games, specifically titles like League of Legends or Counter-Strike.",
+                movies_title: "🎬 Music & Cinema",
+                movies_desc: "I also like music and cinema, especially psychological thrillers like <em>Shutter Island</em>.",
+                footer_sync: "Data synchronized in real-time from GitHub",
+                modal_title: "Contact me",
+                modal_desc: "Send me a message using this form!",
+                label_name: "Your Name",
+                label_email: "Your Email",
+                label_message: "Your Message",
+                submit_btn: "Send Message",
+                ph_name: "John Doe",
+                ph_email: "john@example.com",
+                ph_message: "Hello Mathis, I'm contacting you to...",
+                default_bio: "1st year Master's student in Computer Science at the University of Lille.",
+                followers: "followers",
+                repos: "repositories",
+                no_repos_label: "No public repository yet.",
+                no_lang_label: "No language detected in recent repositories."
+            }
+        };
+
+        function setLang(lang) {
+            document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            document.documentElement.lang = lang;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[lang][key];
+                    } else {
+                        el.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+        }
     </script>
 </body>
 
