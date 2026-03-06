@@ -301,23 +301,35 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
         }
 
         .social-links a {
             color: var(--text-main);
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 0.6rem 1.2rem;
-            border-radius: var(--border-radius-sm);
-            transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed);
+            text-decoration: none;
         }
 
         .social-links a:hover {
             background: var(--bg-card-hover);
             color: var(--accent-color);
+            transform: translateY(-3px);
             text-decoration: none;
+        }
+
+        .social-links svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
         }
 
         .live-indicator {
@@ -362,6 +374,252 @@
             display: none;
         }
 
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #58a6ff 0%, #3178c6 100%);
+            color: #ffffff !important;
+            box-shadow: 0 4px 15px rgba(88, 166, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(88, 166, 255, 0.5);
+            text-decoration: none;
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            fill: currentColor;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 14px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            border: 3px solid var(--bg-color);
+            box-shadow: 0 0 0 2px var(--border-color);
+            z-index: 1;
+        }
+
+        .timeline-item:hover .timeline-dot {
+            box-shadow: 0 0 0 2px var(--accent-color);
+            background: #ffffff;
+        }
+
+        .timeline-date {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            line-height: 1.5;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: var(--border-radius-lg);
+            transition: border-color var(--transition-speed);
+        }
+
+        .timeline-item:hover .timeline-desc {
+            border-color: var(--accent-color);
+        }
+
+        /* --- NOUVEAUX STYLES : MODALE DE CONTACT --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(13, 17, 23, 0.85);
+            /* Fond assombri */
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform var(--transition-speed) ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 5px;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .modal-close:hover {
+            color: var(--text-main);
+        }
+
+        .modal-close svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
         @media (max-width: 600px) {
             .hero h1 {
                 font-size: 1.8rem;
@@ -400,6 +658,35 @@
                 <div class="skeleton skeleton-text short" style="margin: 0 auto;"></div>
             </div>
 
+            <div class="social-links" id="social-links">
+                <a href="https://github.com/mathiceuh" target="_blank" rel="noopener noreferrer" title="GitHub">
+                    <svg>
+                        <use href="#icon-github"></use>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/mathis-lefèvre-174744364/" target="_blank"
+                    rel="noopener noreferrer" title="LinkedIn">
+                    <svg>
+                        <use href="#icon-linkedin"></use>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="hero-actions" style="margin-bottom: 1.5rem;">
+                <a href="./cv stage.pdf" download="Mathis_Lefevre_CV.pdf" class="btn btn-secondary">
+                    <svg>
+                        <use href="#icon-download"></use>
+                    </svg>
+                    Télécharger mon CV
+                </a>
+                <button id="contact-btn" class="btn btn-secondary">
+                    <svg>
+                        <use href="#icon-mail"></use>
+                    </svg>
+                    Me contacter
+                </button>
+            </div>
+
             <div id="badges-container" class="badges">
             </div>
         </section>
@@ -435,6 +722,41 @@
         </section>
 
         <section class="fade-in delay-2">
+            <h2 class="section-title">Parcours</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2025 - Actuel</div>
+                    <h3 class="timeline-title">Master Informatique (e-Services)</h3>
+                    <div class="timeline-subtitle">Université de Lille</div>
+                    <div class="timeline-desc">
+                        Approfondissement en ingénierie logicielle, architecture des services web avancés et gestion de
+                        projet informatique.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2022 - 2025</div>
+                    <h3 class="timeline-title">Licence Informatique</h3>
+                    <div class="timeline-subtitle">Université de Valenciennes (UPHF)</div>
+                    <div class="timeline-desc">
+                        Acquisition des fondamentaux en développement, algorithmique, base de données et architectures
+                        logicielles.
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2022</div>
+                    <h3 class="timeline-title">Baccalauréat Général (Spécialités Maths, Physique-Chimie)</h3>
+                    <div class="timeline-subtitle">Institut d'Anchin, Pecquencourt</div>
+                    <div class="timeline-desc">
+                        Obtention du baccalauréat avec la mention Assez Bien.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="fade-in delay-2">
             <h2 class="section-title">Langages dominants</h2>
             <div id="languages-container" class="languages-container">
                 <div class="skeleton skeleton-text short" style="height: 2.5rem; border-radius: 20px;"></div>
@@ -443,11 +765,7 @@
         </section>
 
         <footer class="footer fade-in delay-2">
-            <div class="social-links" id="social-links">
-                <a href="https://github.com/mathiceuh" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://www.linkedin.com/in/mathis-lefèvre-174744364/" target="_blank"
-                    rel="noopener noreferrer">LinkedIn</a>
-            </div>
+
 
             <div class="live-indicator">
                 <span class="pulsing-dot"></span>
@@ -458,6 +776,10 @@
     </div>
 
     <svg style="display: none;">
+        <symbol id="icon-close" viewBox="0 0 24 24">
+            <path
+                d="M24 2.417L21.583 0 12 9.583 2.417 0 0 2.417 9.583 12 0 21.583 2.417 24 12 14.417 21.583 24 24 21.583 14.417 12z" />
+        </symbol>
         <symbol id="icon-repo" viewBox="0 0 16 16">
             <path
                 d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z">
@@ -488,7 +810,64 @@
                 d="M16 3.538a6.46 6.46 0 01-1.884.516 3.3 3.3 0 001.444-1.816 6.607 6.607 0 01-2.084.797 3.284 3.284 0 00-5.592 2.992 9.317 9.317 0 01-6.76-3.428 3.284 3.284 0 001.018 4.381A3.266 3.266 0 01.656 6.55v.041a3.285 3.285 0 002.633 3.218 3.283 3.283 0 01-1.482.056 3.288 3.288 0 003.065 2.279 6.592 6.592 0 01-4.88 1.365 9.284 9.284 0 005.032 1.474c6.037 0 9.338-5.002 9.338-9.338 0-.142-.003-.284-.01-.425A6.67 6.67 0 0016 3.538z">
             </path>
         </symbol>
+        <symbol id="icon-download" viewBox="0 0 16 16">
+            <path
+                d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zm5-12.25a.75.75 0 011.5 0v7.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V1.75z">
+            </path>
+        </symbol>
+        <symbol id="icon-mail" viewBox="0 0 16 16">
+            <path
+                d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0114.25 14H1.75A1.75 1.75 0 010 12.25v-8.5C0 2.784.784 2 1.75 2zM1.5 12.251c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.636l-6.5 4.225a.75.75 0 01-.818 0l-6.5-4.225v6.615zM14.5 3.75a.25.25 0 00-.25-.25H1.75a.25.25 0 00-.25.25v.718l6.5 4.225 6.5-4.225v-.718z">
+            </path>
+        </symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24">
+            <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+        </symbol>
+        <symbol id="icon-github" viewBox="0 0 24 24">
+            <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+        </symbol>
     </svg>
+
+    <div id="contact-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal-btn" aria-label="Fermer">
+                <svg>
+                    <use href="#icon-close"></use>
+                </svg>
+            </button>
+            <h2 style="color: white; margin-bottom: 0.5rem; font-size: 1.5rem;">Me contacter</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+                Envoyez-moi un message via ce formulaire !
+            </p>
+
+            <form action="https://formspree.io/f/mvzwopwb" method="POST" class="contact-form">
+                <div>
+                    <label for="name" class="form-label">Votre Nom</label>
+                    <input type="text" id="name" name="name" class="form-input" required placeholder="Jean Dupont">
+                </div>
+
+                <div>
+                    <label for="email" class="form-label">Votre Email</label>
+                    <input type="email" id="email" name="_replyto" class="form-input" required
+                        placeholder="jean@exemple.com">
+                </div>
+
+                <div>
+                    <label for="message" class="form-label">Votre Message</label>
+                    <textarea id="message" name="message" class="form-textarea" required
+                        placeholder="Bonjour Mathis, je vous contacte pour..."></textarea>
+                </div>
+
+                <input type="hidden" name="_language" value="fr" />
+
+                <button type="submit" class="btn btn-primary form-submit">
+                    Envoyer le message
+                </button>
+            </form>
+        </div>
+    </div>
 
     <script>
         const GITHUB_USERNAME = 'mathiceuh';
@@ -534,7 +913,7 @@
                 renderLanguages(repos);
 
             } catch (error) {
-                console.error('Erreur lors de la récupération des données GitHub:', error);
+                console.error('Erreur:', error);
                 document.getElementById('error-container').style.display = 'block';
             }
         }
@@ -543,24 +922,18 @@
             const avatarContainer = document.querySelector('.avatar-container');
             const img = document.createElement('img');
             img.src = profile.avatar_url;
-            img.alt = `Avatar de ${profile.login}`;
             img.className = 'avatar';
 
             document.getElementById('avatar-skeleton').remove();
             avatarContainer.appendChild(img);
 
-            const nameEl = document.getElementById('user-name');
-            nameEl.textContent = profile.name || profile.login;
-
-            const bioEl = document.getElementById('user-bio');
-            bioEl.textContent = profile.bio || "Étudiant en 1ère année de Master Informatique à l'Université de Lille.";
+            document.getElementById('user-name').textContent = profile.name || profile.login;
+            document.getElementById('user-bio').textContent = profile.bio || "Étudiant en 1ère année de Master Informatique à l'Université de Lille.";
 
             const badgesContainer = document.getElementById('badges-container');
             badgesContainer.innerHTML = '';
 
-            if (profile.location) {
-                appendBadge(badgesContainer, 'icon-location', profile.location);
-            }
+            if (profile.location) appendBadge(badgesContainer, 'icon-location', profile.location);
             appendBadge(badgesContainer, 'icon-users', `${profile.followers} abonnés`);
             appendBadge(badgesContainer, 'icon-repo', `${profile.public_repos} repos`);
 
@@ -570,7 +943,8 @@
                 twitterLink.href = `https://twitter.com/${profile.twitter_username}`;
                 twitterLink.target = "_blank";
                 twitterLink.rel = "noopener noreferrer";
-                twitterLink.textContent = "Twitter / X";
+                twitterLink.title = "Twitter / X";
+                twitterLink.innerHTML = '<svg><use href="#icon-twitter"></use></svg>';
                 socialLinks.insertBefore(twitterLink, socialLinks.children[1]);
             }
         }
@@ -578,15 +952,12 @@
         function appendBadge(container, iconId, text) {
             const badge = document.createElement('div');
             badge.className = 'badge';
-
             const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
             const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
             use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `#${iconId}`);
             svg.appendChild(use);
-
             const span = document.createElement('span');
             span.textContent = text;
-
             badge.appendChild(svg);
             badge.appendChild(span);
             container.appendChild(badge);
@@ -595,11 +966,7 @@
         function renderRepos(repos) {
             const grid = document.getElementById('projects-grid');
             grid.innerHTML = '';
-
-            if (repos.length === 0) {
-                grid.textContent = "Aucun dépôt public pour le moment.";
-                return;
-            }
+            if (repos.length === 0) { grid.textContent = "Aucun dépôt public pour le moment."; return; }
 
             repos.forEach(repo => {
                 const card = document.createElement('article');
@@ -658,35 +1025,46 @@
         function renderLanguages(repos) {
             const container = document.getElementById('languages-container');
             container.innerHTML = '';
-
             const languagesSet = new Set();
-            repos.forEach(repo => {
-                if (repo.language) languagesSet.add(repo.language);
-            });
+            repos.forEach(repo => { if (repo.language) languagesSet.add(repo.language); });
 
-            if (languagesSet.size === 0) {
-                container.textContent = "Aucun langage détecté dans les dépôts récents.";
-                return;
-            }
+            if (languagesSet.size === 0) { container.textContent = "Aucun langage détecté dans les dépôts récents."; return; }
 
             languagesSet.forEach(lang => {
                 const tag = document.createElement('div');
                 tag.className = 'lang-tag';
-
                 const dot = document.createElement('span');
                 dot.className = 'lang-dot';
                 dot.style.backgroundColor = getLangColor(lang);
-
                 const text = document.createElement('span');
                 text.textContent = lang;
-
                 tag.appendChild(dot);
                 tag.appendChild(text);
                 container.appendChild(tag);
             });
         }
 
-        document.addEventListener('DOMContentLoaded', fetchGitHubData);
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchGitHubData();
+
+            const modal = document.getElementById('contact-modal');
+            const openBtn = document.getElementById('contact-btn');
+            const closeBtn = document.getElementById('close-modal-btn');
+
+            openBtn.addEventListener('click', () => {
+                modal.classList.add('active');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
     </script>
 </body>
 
